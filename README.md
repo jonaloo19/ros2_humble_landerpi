@@ -1,6 +1,6 @@
 # ros2_humble_landerpi
 
-This repository provides a streamlined, ready-to-use setup for ROS 2 Humble, Gazebo (Fortress) simulation environment, and the LanderPi robot model. It is designed to help users quickly install the required ROS2 packages, build the LanderPi workspace (ros2_ws), and launch the LanderPi robot model in Gazebo with minimal configuration effort.
+This repository provides a streamlined, ready-to-use setup for ROS2 Humble, Gazebo (Fortress) simulation environment, and the LanderPi robot model. It is designed to help users quickly install the required ROS2 packages, build the LanderPi workspace (ros2_ws), and launch the LanderPi robot model in Gazebo with minimal configuration effort.
 
 To keep the process simple, the repo assumes that you already have a clean installation of Ubuntu 22.04 (Jammy), which is the officially supported OS for ROS2 Humble. Once Ubuntu 22.04 is in place, the provided scripts will guide you through setting up ROS2 Humble, installing dependencies, and running the LanderPi robot model in Gazebo.
 
