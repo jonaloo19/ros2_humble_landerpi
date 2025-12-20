@@ -1,0 +1,13 @@
+# Goal: Target grasp pose
+geometry_msgs/PoseStamped target_pose
+string object_id  # Optional: object identifier (e.g., "red_block", "green_block")
+---
+# Result: Execution result
+bool success
+int32 error_code  # 0=success, 1=TF failed, 2=IK failed, 3=planning failed, 4=execution failed, 5=gripper failed
+string message
+---
+# Feedback: Real-time progress
+float32 progress  # 0.0 to 1.0
+string stage      # Current stage: "opening_gripper", "planning_pregrasp", "approaching", "grasping", "closing_gripper", "lifting"
+

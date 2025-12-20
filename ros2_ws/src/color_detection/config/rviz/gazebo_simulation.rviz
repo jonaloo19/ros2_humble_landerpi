@@ -1,0 +1,50 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Grid
+      Reference Frame: robot/link4/robot_cam  # 使用正确的坐标系
+      Plane: XY
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Image Topic: /depth_cam/depth_cam
+      Name: Camera Image
+      Transport: raw
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Image Topic: /color_detection/debug_image
+      Name: Detection Result
+      Transport: raw
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+    - Class: rviz_default_plugins/PointCloud2
+      Enabled: true
+      Name: Laser PointCloud
+      Topic: /scan/points  # 激光雷达点云
+      Style: Points
+      Size (Pixels): 3
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: robot/link4/robot_cam  # 使用正确的坐标系
+    Frame Rate: 30
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Distance: 5
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Pitch: 0.5
+      Yaw: 0.5
+

@@ -1,0 +1,34 @@
+# 颜色范围配置 (HSV 格式)
+colors:
+  red:
+    lower1: [0, 100, 100]
+    upper1: [10, 255, 255]
+    lower2: [160, 100, 100]
+    upper2: [180, 255, 255]
+    name: "red"
+    bgr_color: [0, 0, 255]  # BGR格式：红色
+    
+  green:
+    lower: [40, 100, 100]
+    upper: [80, 255, 255]
+    name: "green"
+    bgr_color: [0, 255, 0]  # BGR格式：绿色
+    
+  blue:
+    lower: [100, 100, 100]
+    upper: [130, 255, 255]
+    name: "blue"
+    bgr_color: [255, 0, 0]  # BGR格式：蓝色
+    
+  yellow:
+    lower: [20, 100, 100]
+    upper: [40, 255, 255]
+    name: "yellow"
+    bgr_color: [0, 255, 255]  # BGR格式：黄色
+
+# 检测参数
+detection:
+  min_area: 500  # 最小区域面积（像素）
+  max_area: 50000  # 最大区域面积（像素）
+  blur_size: 5  # 模糊核大小
+  show_mask: true  # 是否显示掩码

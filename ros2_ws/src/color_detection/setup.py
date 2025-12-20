@@ -1,0 +1,40 @@
+from setuptools import setup, find_packages
+import os
+from glob import glob
+
+package_name = 'color_detection'
+
+setup(
+    name=package_name,
+    version='0.0.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        # 包含launch文件
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
+        # 包含配置文件
+        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+        # 包含RViz配置文件
+        (os.path.join('share', package_name, 'config/rviz'), glob('config/rviz/*.rviz')),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='harry',
+    maintainer_email='harry@todo.todo',
+    description='Color detection with OpenCV and depth information',
+    license='Apache-2.0',
+    tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+            'simple_color_detector = color_detection.simple_color_detector:main',
+            'multi_color_detector = color_detection.multi_color_detector:main',
+            'color_detector_fixed = color_detection.multi_color_detector_fixed:main',
+            'english_color_detector = color_detection.english_color_detector:main',
+            'black_text_detector = color_detection.black_text_detector:main',
+            # 添加新的深度节点
+            'multi_color_detector_with_depth = color_detection.nodes.multi_color_detector_with_depth:main'
+        ],
+    },
+)

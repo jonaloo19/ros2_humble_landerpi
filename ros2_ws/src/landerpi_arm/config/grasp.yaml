@@ -1,0 +1,34 @@
+# Grasp Action Server Configuration
+
+/**:
+  ros__parameters:
+    # MoveIt2 planning configuration
+    planning:
+      planning_frame: "base_footprint"     # Planning reference frame (must match SRDF)
+      group_name: "arm"                    # MoveGroup name
+      ee_link: "end_effector_link"         # End effector link
+      velocity_scaling: 0.25               # Velocity scaling factor (0-1)
+      acceleration_scaling: 0.20           # Acceleration scaling factor (0-1)
+      planning_timeout: 3.0                # Planning timeout (seconds)
+      max_planning_retries: 2              # Max planning retry attempts
+    
+    # Grasp strategy offsets (relative to target pose)
+    grasp_offsets:
+      approach: [0.0, 0.0, 0.12]           # Pregrasp: 12cm above target
+      descend: [0.0, 0.0, -0.125]          # Grasp: descend 12.5cm (into block center for 3cm block)
+      lift: [0.0, 0.0, 0.15]               # Lift: raise 15cm after grasping
+    
+    # Grasp orientation (Roll, Pitch, Yaw in radians)
+    # Default: [0, 1.57, 0] = gripper pointing straight down
+    grasp_orientation:
+      roll: 0.0                            # No roll
+      pitch: 1.57                          # 90° pitch (pointing down)
+      yaw: 0.0                             # No yaw
+    
+    # Gripper control
+    gripper:
+      controller_name: "gripper_controller"
+      joint_name: "gripper_base_joint"
+      open_position: 0.0                   # Fully open (radians)
+      close_position: -1.5                # Close tighter; adjust if still loose (-94° in radians)
+      command_timeout: 50.0                 # Allow more time for gripper to reach target

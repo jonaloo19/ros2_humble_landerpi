@@ -1,0 +1,13 @@
+/**:
+  ros__parameters:
+    type: "action"
+    action:
+      action_name: "init"
+    servo:
+      id1: 500
+      id2: 500
+      id3: 500
+      id4: 500
+      id5: 500
+      id10: 500
+      duration: 1.5 

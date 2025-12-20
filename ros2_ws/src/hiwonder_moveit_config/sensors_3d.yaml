@@ -1,0 +1,27 @@
+# sensors:
+#   - default_sensor
+# default_sensor:
+#   filtered_cloud_topic: filtered_cloud
+#   max_range: 5.0
+#   max_update_rate: 1.0
+#   padding_offset: 0.1
+#   padding_scale: 1.0
+#   point_cloud_topic: /head_mount_kinect/depth_registered/points
+#   point_subsample: 1
+#   sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
+
+sensors:
+  - default_sensor
+default_sensor:
+  sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
+  point_cloud_topic: /ascamera/camera_publisher/depth0/points
+  max_range: 5.0        # 根据相机量程调整
+  point_subsample: 1
+  padding_offset: 0.01
+  padding_scale: 1.0
+  max_update_rate: 1.0
+  octomap_resolution: 0.02
+  filtered_cloud_topic: filtered_points
+  queue_size: 10        # 增加队列大小以处理时间戳问题
+  tf_tolerance: 0.5     # 增加TF容忍度
+  # map_frame: depth_cam_link       # 与 TF 中固定世界坐标一致
