@@ -97,10 +97,24 @@ echo "[info] Workspace copied."
 # 4. Build workspace
 # ----------------------------------------------------------------------
 echo "[4/6] Building workspace with colcon..."
+echo "[4/6] Sourcing ROS 2 Humble..."
+source /opt/ros/humble/setup.bash
 cd "$DEST_WS"
-colcon build --symlink-install
-echo "[4/6] Running second build pass..."
-colcon build --symlink-install
+
+max_passes=5
+pass=1
+while true; do
+  echo "[4/6] Build pass ${pass}/${max_passes}..."
+  if colcon build --symlink-install; then
+    echo "[4/6] Build succeeded."
+    break
+  fi
+  if [ "$pass" -ge "$max_passes" ]; then
+    echo "[ERROR] Build failed after ${max_passes} passes."
+    exit 1
+  fi
+  pass=$((pass + 1))
+done
 
 # ----------------------------------------------------------------------
 # 5. Configure bashrc

@@ -48,6 +48,13 @@ After running, open a new terminal (or `source ~/.bashrc`) to load the environme
 - LLM + examples: `large_models`, `large_models_examples` (configure API keys).
 - Bringup & hardware: `bringup`, `calibration`, `ldlidar_stl_ros2`, `xf_mic_asr_offline`, `xf_mic_asr_offline_msgs`.
 
+## Manual Workspace (ros2_ws) build
+Use the provided colcon build command when you need to rebuild the workspace manually (for example, after developing a custom ROS application). Run:
+```bash
+cd ~/ros2_ws
+colcon build --symlink-install
+```
+
 ## Running quick checks
 Without tmux (separate terminals):
 ```bash
