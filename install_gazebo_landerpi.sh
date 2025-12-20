@@ -93,6 +93,14 @@ echo "[info] Copying workspace to $DEST_WS"
 rsync -a "$SOURCE_WS/" "$DEST_WS/"
 echo "[info] Workspace copied."
 
+if [ -f "$REPO_ROOT/killros.sh" ]; then
+  echo "[info] Copying killros.sh to $HOME..."
+  cp "$REPO_ROOT/killros.sh" "$HOME/killros.sh"
+  chmod +x "$HOME/killros.sh"
+else
+  echo "[warn] killros.sh not found in repo; skipping copy."
+fi
+
 # ----------------------------------------------------------------------
 # 4. Build workspace
 # ----------------------------------------------------------------------
