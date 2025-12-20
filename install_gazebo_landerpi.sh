@@ -45,7 +45,7 @@ sudo apt install -y ros-humble-ros-gz
 sudo apt install -y ros-humble-ros-ign-gazebo
 sudo apt install -y ros-humble-ros-ign-bridge
 sudo apt install -y ros-humble-gz-ros2-control
-sudo apt install -y ros-humble-lib2go
+sudo apt install -y ros-humble-libg2o
 
 # Controllers & nav stack components
 sudo apt install -y ros-humble-controller-manager \
