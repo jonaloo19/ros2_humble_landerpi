@@ -34,17 +34,26 @@ try_pkill joint_state_broadcaster
 try_pkill joint_state_publisher
 try_pkill spawner
 try_pkill "ros2 launch"
+try_pkill "ros2 run"
 try_pkill rviz2
 try_pkill nav2
 try_pkill velocity_smoother
 try_pkill waypoint_follower
 try_pkill slam_toolbox
+try_pkill move_group
+try_pkill moveit
+try_pkill grasp_action_server
+try_pkill landerpi_arm
+try_pkill color_detection
+try_pkill custom_explorer
+try_pkill explorer
 try_pkill lifecycle_manager
 try_pkill behavior_server
 try_pkill bt_navigator
 try_pkill planner_server
 try_pkill controller_server
 try_pkill smoother_server
+try_pkill ros2-daemon
 
 # Nuclear fallback (comment out if you want gentler behaviour)
 try_pkill "ign gazebo"
