@@ -152,19 +152,19 @@ grep -n "source ~/ros2_ws/.typerc" $BASHRC || echo "[warn] .typerc entry not fou
 grep -n "IGN_GAZEBO_RESOURCE_PATH" $BASHRC || echo "[warn] IGN_GAZEBO_RESOURCE_PATH entry not found in bashrc"
 
 # ----------------------------------------------------------------------
-# 6. GPU fallback (optional)
+# 6. CPU render defaults (GPU optional)
 # ----------------------------------------------------------------------
-echo "[6/6] Adding optional CPU-render overrides for Gazebo (commented out by default)."
+echo "[6/6] Enabling CPU-render defaults for Gazebo (comment out to use GPU)."
 
 if ! grep -q "LIBGL_ALWAYS_SOFTWARE" $BASHRC; then
   cat <<EOF >> $BASHRC
 
-# Force Gazebo to run on CPU (uncomment if OGRE errors appear)
-# export LIBGL_ALWAYS_SOFTWARE=1
-# export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
+# Force Gazebo to run on CPU (comment out to use GPU)
+export LIBGL_ALWAYS_SOFTWARE=1
+export MESA_LOADER_DRIVER_OVERRIDE=llvmpipe
 
 EOF
-  echo "[bashrc] Added (commented) CPU render options."
+  echo "[bashrc] Added CPU render defaults."
 fi
 
 echo ""
@@ -173,5 +173,5 @@ echo " Installation complete!"
 echo " Run:"
 echo "   source ~/.bashrc"
 echo "   ros2 launch robot_gazebo room_worlds.launch.py   # world + robot"
-echo " If the launch is unsuccessful, open ~/.bashrc and uncomment the environment parameters to force Gazebo CPU rendering."
+echo " If you want GPU rendering, open ~/.bashrc and comment out the CPU render exports."
 echo "============================================================"

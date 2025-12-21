@@ -2,36 +2,62 @@
 
 echo "🔪 Killing ROS 2, Gazebo, ros2_control, bridges..."
 
+if [ -f /opt/ros/humble/setup.bash ]; then
+  # Ensure ros2 is in PATH even when running with sudo.
+  source /opt/ros/humble/setup.bash
+fi
+
+try_pkill() {
+  pkill -f "$1" >/dev/null 2>&1 || true
+}
+
 # Kill Gazebo / Ignition
-pkill -f ign_gazebo
-pkill -f ign
-pkill -f gazebo
+try_pkill ign_gazebo
+try_pkill "ign gazebo"
+try_pkill ign
+try_pkill gazebo
 
 # Kill ros2_control + controllers
-pkill -f controller_manager
-pkill -f gz_ros2_control
-pkill -f ign_ros2_control
-pkill -f ros2_control
+try_pkill controller_manager
+try_pkill gz_ros2_control
+try_pkill ign_ros2_control
+try_pkill ros2_control
 
 # Kill ROS-GZ bridges
-pkill -f ros_gz_bridge
-pkill -f parameter_bridge
+try_pkill ros_gz_bridge
+try_pkill parameter_bridge
 
 # Kill common ROS 2 nodes
-pkill -f robot_state_publisher
-pkill -f static_transform_publisher
-pkill -f joint_state_broadcaster
-pkill -f joint_state_publisher
-pkill -f spawner
+try_pkill robot_state_publisher
+try_pkill static_transform_publisher
+try_pkill joint_state_broadcaster
+try_pkill joint_state_publisher
+try_pkill spawner
+try_pkill "ros2 launch"
+try_pkill rviz2
+try_pkill nav2
+try_pkill velocity_smoother
+try_pkill waypoint_follower
+try_pkill slam_toolbox
+try_pkill lifecycle_manager
+try_pkill behavior_server
+try_pkill bt_navigator
+try_pkill planner_server
+try_pkill controller_server
+try_pkill smoother_server
 
 # Nuclear fallback (comment out if you want gentler behaviour)
-pkill -9 -f ign
-pkill -9 -f gazebo
+try_pkill "ign gazebo"
+try_pkill ign
+try_pkill gazebo
 
 # Reset ROS daemon
-ros2 daemon stop
-sleep 1
-ros2 daemon start
+if command -v ros2 >/dev/null 2>&1; then
+  ros2 daemon stop
+  sleep 1
+  ros2 daemon start
+else
+  echo "[warn] ros2 not found in PATH; skipping daemon reset."
+fi
 
 echo "✅ ROS / Gazebo reset complete"
-
