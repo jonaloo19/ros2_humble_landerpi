@@ -7,8 +7,9 @@ from ament_index_python.packages import get_package_share_directory
 
 
 def launch_setup(context):
-    use_sim_time = LaunchConfiguration('use_sim_time', default='true').perform(context)
-    use_sim_time_arg = DeclareLaunchArgument('use_sim_time',default_value=use_sim_time)
+    use_sim_time_cfg = LaunchConfiguration('use_sim_time', default='true')
+    use_sim_time = use_sim_time_cfg.perform(context)
+    use_sim_time_arg = DeclareLaunchArgument('use_sim_time', default_value=use_sim_time)
 
     nav = LaunchConfiguration('nav', default='false').perform(context)
     nav_arg = DeclareLaunchArgument('nav',default_value=nav)
@@ -41,6 +42,7 @@ def launch_setup(context):
                 '/depth_cam/rgb/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
                 ],
         remappings=remappings_default,
+        parameters=[{'use_sim_time': use_sim_time_cfg}],
         output='screen'
     )
 
@@ -49,7 +51,8 @@ def launch_setup(context):
                         executable='static_transform_publisher',
                         name='static_transform_publisher',
                         output='screen',
-                        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'map', 'odom'])
+                        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'map', 'odom'],
+                        parameters=[{'use_sim_time': use_sim_time_cfg}])
     return [
         use_sim_time_arg,
         bridge,

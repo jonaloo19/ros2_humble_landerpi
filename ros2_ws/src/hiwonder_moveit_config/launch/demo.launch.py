@@ -72,7 +72,15 @@ def generate_launch_description():
         executable="move_group",
         output="screen",
         parameters=[moveit_config.to_dict(), {'use_sim_time': use_sim_time}],
-        arguments=["--ros-args", "--log-level", "info"],
+        arguments=[
+            "--ros-args",
+            "--log-level",
+            "info",
+            "--log-level",
+            "moveit_robot_model:=fatal",
+            "--log-level",
+            "moveit_robot_model.robot_model:=fatal",
+        ],
     )
 
     tutorial_mode = LaunchConfiguration("rviz_tutorial")
@@ -87,7 +95,17 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="log",
-        arguments=["-d", rviz_empty_config],
+        arguments=[
+            "-d",
+            rviz_empty_config,
+            "--ros-args",
+            "--log-level",
+            "info",
+            "--log-level",
+            "class_loader:=fatal",
+            "--log-level",
+            "class_loader.impl:=fatal",
+        ],
         parameters=[
             moveit_config.robot_description,
             moveit_config.robot_description_semantic,
@@ -101,7 +119,17 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="log",
-        arguments=["-d", rviz_full_config],
+        arguments=[
+            "-d",
+            rviz_full_config,
+            "--ros-args",
+            "--log-level",
+            "info",
+            "--log-level",
+            "class_loader:=fatal",
+            "--log-level",
+            "class_loader.impl:=fatal",
+        ],
         parameters=[
             moveit_config.robot_description,
             moveit_config.robot_description_semantic,
@@ -117,7 +145,24 @@ def generate_launch_description():
         executable="static_transform_publisher",
         name="static_transform_publisher",
         output="log",
-        arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "world", "base_footprint"],
+        arguments=[
+            "--x",
+            "0.0",
+            "--y",
+            "0.0",
+            "--z",
+            "0.0",
+            "--roll",
+            "0.0",
+            "--pitch",
+            "0.0",
+            "--yaw",
+            "0.0",
+            "--frame-id",
+            "world",
+            "--child-frame-id",
+            "base_footprint",
+        ],
     )
 
     # Publish TF

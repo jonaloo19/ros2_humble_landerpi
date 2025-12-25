@@ -31,7 +31,7 @@ echo "[1/6] Updating apt..."
 sudo apt update
 
 # ----------------------------------------------------------------------
-# 2. Install Gazebo Fortress bridge + ROS 2 tools + controllers
+# 2. Install Gazebo Fortress bridge + ROS2 tools + controllers
 # ----------------------------------------------------------------------
 echo "[2/6] Installing ROS2 + Gazebo Fortress packages..."
 
@@ -45,7 +45,6 @@ sudo apt install -y ros-humble-ros-gz
 sudo apt install -y ros-humble-ros-ign-gazebo
 sudo apt install -y ros-humble-ros-ign-bridge
 sudo apt install -y ros-humble-gz-ros2-control
-sudo apt install -y ros-humble-libg2o
 
 # Controllers & nav stack components
 sudo apt install -y ros-humble-controller-manager \
@@ -63,14 +62,20 @@ sudo apt install -y ros-humble-navigation2 \
                     ros-humble-cartographer \
                     ros-humble-cartographer-ros
 
+sudo apt install -y ros-humble-slam-toolbox
+sudo apt install -y ros-humble-libg2o
+
 # Math libs
 sudo apt install -y libsuitesparse-dev liblapack-dev libblas-dev
 
 # MoveIt + joint state tools
 sudo apt install -y ros-humble-moveit \
                     ros-humble-joint-state-publisher \
-                    ros-humble-joint-state-publisher-gui
-sudo apt install -y ros-humble-slam-toolbox
+                    ros-humble-joint-state-publisher-gui \
+                    ros-humble-octomap \
+                    ros-humble-octomap-mapping \
+                    ros-humble-octomap-server \
+                    ros-humble-moveit-ros-perception
 
 # ----------------------------------------------------------------------
 # 3. Copy workspace from cloned repo to ~/ros2_ws

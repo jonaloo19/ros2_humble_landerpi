@@ -28,9 +28,10 @@ This script:
   - Controllers/nav stack pieces: `ros-humble-controller-manager`, `ros-humble-ros2-control`, `ros-humble-ros2-controllers`, `ros-humble-nav2-costmap-2d`, `ros-humble-dwb-critics`, `ros-humble-dwb-core`, `ros-humble-dwb-plugins`
   - Nav bringup: `ros-humble-navigation2`, `ros-humble-nav2-bringup`
   - SLAM: `ros-humble-cartographer`, `ros-humble-cartographer-ros`, `ros-humble-slam-toolbox`
-  - Motion planning: `ros-humble-moveit`
+  - Motion planning: `ros-humble-moveit`, `ros-humble-moveit-ros-perception`
+  - Mapping: `ros-humble-octomap`, `ros-humble-octomap-mapping`, `ros-humble-octomap-server`
   - Utility: `ros-humble-joint-state-publisher`, `ros-humble-joint-state-publisher-gui`, `tmux`
-  - Math libs: `libnlopt-dev`, `libnlopt-cxx-dev`, `libsuitesparse-dev`, `liblapack-dev`, `libblas-dev`, `ros-humble-lib2go`
+  - Math libs: `libnlopt-dev`, `libnlopt-cxx-dev`, `libsuitesparse-dev`, `liblapack-dev`, `libblas-dev`, `ros-humble-libg2o`
   - System: `rsync`, `lsb-release`
 - Copies the bundled `ros2_ws` from this repo into `~/ros2_ws` (renames any existing `~/ros2_ws` with a timestamp).
 - Builds the workspace with `colcon build --symlink-install` (runs twice).
@@ -45,7 +46,6 @@ After running, open a new terminal (or `source ~/.bashrc`) to load the environme
 - Navigation & exploration: `navigation`, `slam`, `costmap_converter`, `m-explore-ros2`, `Autonomous-Explorer-and-Mapper-ros2-nav2`, `multi`, `peripherals`.
 - Perception & demos: `app`, `example`, `color_detection`, `yolov8_detect`.
 - Manipulation & planners: `hiwonder_moveit_config`, `teb_local_planner`.
-- LLM + examples: `large_models`, `large_models_examples` (configure API keys).
 - Bringup & hardware: `bringup`, `calibration`, `ldlidar_stl_ros2`, `xf_mic_asr_offline`, `xf_mic_asr_offline_msgs`.
 
 ## Manual Workspace (ros2_ws) build

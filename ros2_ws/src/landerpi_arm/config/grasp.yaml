@@ -30,5 +30,5 @@
       controller_name: "gripper_controller"
       joint_name: "gripper_base_joint"
       open_position: 0.0                   # Fully open (radians)
-      close_position: -1.5                # Close tighter; adjust if still loose (-94° in radians)
+      close_position: -1.73                # Close tighter; adjust if still loose (-94° in radians)
       command_timeout: 50.0                 # Allow more time for gripper to reach target
