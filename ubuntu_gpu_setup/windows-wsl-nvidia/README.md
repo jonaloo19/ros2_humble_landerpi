@@ -1,7 +1,3 @@
----
-description: A step-by-step guide to deploying Ubuntu 22.04 with NVIDIA GPU acceleration on Windows 11 WSL
----
-
 # Ubuntu 22.04 with NVIDIA GPU on Windows 11 (WSL2)
 
 This guide provides a **step-by-step walkthrough** for deploying **Ubuntu 22.04.5 LTS with NVIDIA GPU acceleration** using **Windows Subsystem for Linux (WSL2)** on **Windows 11**.  
