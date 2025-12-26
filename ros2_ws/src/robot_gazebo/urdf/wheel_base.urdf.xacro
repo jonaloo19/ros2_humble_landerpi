@@ -138,6 +138,7 @@
             </xacro:if>
         </link>
     </xacro:macro>
+
     <xacro:rectangular_link_macro suffix="top_plate" mass="5.0" arg="5.0" width="0.3" height="0.1" depth="0.15" if_collision="true" if_visual="false"/>
 
     <joint name="top_plate_joint" type="fixed">

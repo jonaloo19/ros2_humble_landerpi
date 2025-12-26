@@ -139,32 +139,6 @@ def generate_launch_description():
         condition=UnlessCondition(tutorial_mode),
     )
 
-    # Static TF
-    static_tf_node = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        name="static_transform_publisher",
-        output="log",
-        arguments=[
-            "--x",
-            "0.0",
-            "--y",
-            "0.0",
-            "--z",
-            "0.0",
-            "--roll",
-            "0.0",
-            "--pitch",
-            "0.0",
-            "--yaw",
-            "0.0",
-            "--frame-id",
-            "world",
-            "--child-frame-id",
-            "base_footprint",
-        ],
-    )
-
     # Publish TF
     robot_state_publisher = Node(
         package="robot_state_publisher",
@@ -254,7 +228,6 @@ def generate_launch_description():
             use_real_arg,
             rviz_node,
             rviz_node_tutorial,
-            static_tf_node,
             robot_state_publisher,
             move_group_node,
             ros2_control_node,
