@@ -307,6 +307,9 @@ class MultiColorDetectorWithDepth(Node):
         """Process image, detect all colors, and get depth information"""
         # Copy original image for drawing
         debug_image = rgb_image.copy()
+
+        # Draw a small cross at the image center for reference
+        self.draw_center_cross(debug_image)
         
         # Convert to HSV color space
         hsv = cv2.cvtColor(rgb_image, cv2.COLOR_BGR2HSV)
@@ -325,6 +328,9 @@ class MultiColorDetectorWithDepth(Node):
             color_name = color_info['name']
             bgr_color = color_info['bgr_color']
             hsv_ranges = color_info['hsv_ranges']
+            frame_h, frame_w = rgb_image.shape[:2]
+            frame_cx = frame_w // 2
+            frame_cy = frame_h // 2
             
             # Merge multiple HSV ranges
             mask = None
@@ -414,6 +420,10 @@ class MultiColorDetectorWithDepth(Node):
                             'height': int(h),
                             'center_x': int(center_x),
                             'center_y': int(center_y),
+                            'frame_center_x': int(frame_cx),
+                            'frame_center_y': int(frame_cy),
+                            'delta_x': int(frame_cx - center_x),
+                            'delta_y': int(frame_cy - center_y),
                             'area': float(area),
                             'aspect_ratio': float(aspect_ratio),
                             'estimated_distance_m': float(distance),
@@ -435,6 +445,17 @@ class MultiColorDetectorWithDepth(Node):
         self.draw_statistics(debug_image, all_detections)
         
         return debug_image, all_detections
+
+    def draw_center_cross(self, image):
+        """Draw a small '+' at the center of the frame"""
+        height, width = image.shape[:2]
+        cx = width // 2
+        cy = height // 2
+        size = 6
+        color = (255, 255, 255)
+        thickness = 1
+        cv2.line(image, (cx - size, cy), (cx + size, cy), color, thickness, cv2.LINE_AA)
+        cv2.line(image, (cx, cy - size), (cx, cy + size), color, thickness, cv2.LINE_AA)
     
     def draw_detection(self, image, detection, bgr_color):
         """Draw detection result on image"""
@@ -447,6 +468,11 @@ class MultiColorDetectorWithDepth(Node):
         color_name = detection['color_name']
         distance = detection['estimated_distance_m']
         depth_value = detection.get('depth_value')
+        img_h, img_w = image.shape[:2]
+        frame_cx = img_w // 2
+        frame_cy = img_h // 2
+        delta_x = frame_cx - center_x
+        delta_y = frame_cy - center_y
         
         # 1. Draw bounding box
         thickness = 3
@@ -530,6 +556,19 @@ class MultiColorDetectorWithDepth(Node):
             (center_x - 25, center_y + 15),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.4,
+            (255, 255, 255),
+            1,
+            cv2.LINE_AA
+        )
+
+        # 5. Show offset from frame center (pixels)
+        offset_text = f"Delta({delta_x}, {delta_y})"
+        cv2.putText(
+            image,
+            offset_text,
+            (10, 80),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
             (255, 255, 255),
             1,
             cv2.LINE_AA
