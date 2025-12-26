@@ -316,36 +316,5 @@
     <axis
       xyz="0 0 0" />
   </joint>
-<!-- ==================== Ignition Gazebo Fortress 深度相机 ==================== -->
-  <!-- Gazebo 深度相机传感器（Fortress + ros_gz_bridge 用） -->
-  <gazebo reference="depth_cam_link">
-    <!-- 1）类型改成 depth_camera，显式指定 Gazebo 内部话题名 -->
-    <sensor name="depth_camera" type="depth_camera">
-      <always_on>true</always_on>
-      <update_rate>30.0</update_rate>
-      <visualize>true</visualize>
-
-      <!-- 这个 topic 是 Gazebo Transport 里的名字，
-           等会儿 ros_gz_bridge 会用它来桥接到 /depth_cam/depth_image -->
-      <topic>/depth_cam/depth_image</topic>
-
-      <camera>
-        <horizontal_fov>1.047</horizontal_fov>
-        <image>
-          <width>640</width>
-          <height>480</height>
-          <!-- Fortress 里常用 R_FLOAT32 做深度 -->
-          <format>R_FLOAT32</format>
-        </image>
-        <clip>
-          <near>0.1</near>
-          <far>5.0</far>
-        </clip>
-      </camera>
-    </sensor>
-  </gazebo>
-
-
-
 
 </robot>
