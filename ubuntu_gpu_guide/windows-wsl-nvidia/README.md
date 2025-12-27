@@ -189,12 +189,9 @@ sudo apt install nautilus -y
 ```
 
 ### 5.3 Visual Studio Code Integration
+VS Code provides seamless WSL integration for Linux development workflows, including ROS development. Official guide: https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode
 
-VS Code provides seamless WSL integration for Linux development workflows, including **ROS development**.
 ![VS_Code](image8.png)
-
-Official guide:  
-https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode
 
 ---
 
