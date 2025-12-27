@@ -2,6 +2,12 @@
 
 This repository assumes you first install Ubuntu 22.04 (Jammy), then use the provided scripts to install ROS2 Humble, Gazebo (Fortress), and the LanderPi model/examples. It ships a ready-to-use ROS2 Humble workspace covering the robot, navigation/SLAM stacks, arm control, and perception demos. The scripts install ROS2, dependencies, copy the workspace to `~/ros2_ws`, and build it.
 
+## Ubuntu GPU guides
+This section provides setup guides for Ubuntu 22.04 GPU configurations in dual-boot and WSL2 environments to ensure Gazebo and ROS2 run with hardware acceleration.
+
+- [`ubuntu_gpu_guide/dual-boot-nvidia`](ubuntu_gpu_guide/dual-boot-nvidia/README.md): Ubuntu 22.04 dual-boot with Windows 11, native NVIDIA driver install, GPU acceleration checks, PRIME/hybrid graphics validation, and Gazebo launch guidance.
+- [`ubuntu_gpu_guide/windows-wsl-nvidia`](ubuntu_gpu_guide/windows-wsl-nvidia/README.md): Ubuntu 22.04 on Windows 11 via WSL2, NVIDIA GPU passthrough with Mesa D3D12 setup, persistent GPU config, and a recommended Windows/WSL workflow.
+
 ## Install flow
 
 1) Clone this repo (contains the install scripts and the `ros2_ws` workspace):
