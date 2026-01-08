@@ -54,6 +54,11 @@ try_pkill planner_server
 try_pkill controller_server
 try_pkill smoother_server
 try_pkill ros2-daemon
+try_pkill pick
+try_pkill drop
+try_pkill locate
+try_pkill detect
+try_pkill mission_runner
 
 # Nuclear fallback (comment out if you want gentler behaviour)
 try_pkill "ign gazebo"

@@ -3,6 +3,7 @@
   <gazebo reference="depth_cam_link">
     <!-- RGB CAMERA -->
     <sensor name="rgb_cam" type="camera">
+      <frame>depth_cam_link</frame>
       <camera>
         <horizontal_fov>1.047</horizontal_fov>
         <image>
@@ -24,6 +25,7 @@
 
     <!-- DEPTH CAMERA -->
     <sensor name="depth_cam" type="depth_camera">
+      <frame>depth_cam_link</frame>
       <!-- 这个 topic 是 Gazebo Transport 里的名字，
            等会儿 ros_ign_bridge 会用它来桥接到 /depth_cam/depth_image -->
       <camera>

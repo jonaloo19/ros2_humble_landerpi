@@ -40,6 +40,7 @@ def launch_setup(context):
                 '/depth_cam/depth_cam@sensor_msgs/msg/Image[ignition.msgs.Image',
                 '/depth_cam/depth_image@sensor_msgs/msg/Image[ignition.msgs.Image',
                 '/depth_cam/rgb/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
+                '/depth_cam/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
                 ],
         remappings=remappings_default,
         parameters=[{'use_sim_time': use_sim_time_cfg}],
@@ -53,10 +54,26 @@ def launch_setup(context):
                         output='screen',
                         arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'map', 'odom'],
                         parameters=[{'use_sim_time': use_sim_time_cfg}])
+    depth_cam_static_tf = Node(
+                        package='tf2_ros',
+                        executable='static_transform_publisher',
+                        name='depth_cam_static_tf',
+                        output='screen',
+                        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'depth_cam_link', 'robot/link4/depth_cam'],
+                        parameters=[{'use_sim_time': use_sim_time_cfg}])
+    rgb_cam_static_tf = Node(
+                        package='tf2_ros',
+                        executable='static_transform_publisher',
+                        name='rgb_cam_static_tf',
+                        output='screen',
+                        arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'depth_cam_link', 'robot/link4/rgb_cam'],
+                        parameters=[{'use_sim_time': use_sim_time_cfg}])
     return [
         use_sim_time_arg,
         bridge,
-        map_static_tf
+        map_static_tf,
+        depth_cam_static_tf,
+        rgb_cam_static_tf
     ]
 
 

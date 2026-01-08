@@ -2,8 +2,9 @@
 <sdf version="1.6">
   <world name="robot_world">
     <physics name="1ms" type="ignored">
-      <max_step_size>0.03</max_step_size>
+      <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
     </physics>
     <plugin
       filename="ignition-gazebo-physics-system"
@@ -803,7 +804,7 @@
 
     <!-- Demo pickup blocks for LanderPi arm -->
     <model name='demo_block_red'>
-      <pose>0.20 0.10 0.025 0 0 0</pose>
+      <pose>0.35 0.10 0.025 0 0 0</pose>
       <static>false</static>
       <link name='body'>
         <inertial>
@@ -849,7 +850,7 @@
     </model>
 
     <model name='demo_block_green'>
-      <pose>0.20 -0.10 0.025 0 0 0</pose>
+      <pose>0.35 0.0 0.025 0 0 0</pose>
       <static>false</static>
       <link name='body'>
         <inertial>

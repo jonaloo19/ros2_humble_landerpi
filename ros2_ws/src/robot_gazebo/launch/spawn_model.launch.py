@@ -84,8 +84,8 @@ def launch_setup(context):
         arguments=['-topic', 'robot_description',
                     '-name', 'robot',
                     '-allow_renaming', 'true',
-                    '-x', '0',
-                    '-y', '0'
+                    '-x', '0.0',
+                    '-y', '0.0'
                     ],
         parameters=[
             {"use_sim_time": True}],

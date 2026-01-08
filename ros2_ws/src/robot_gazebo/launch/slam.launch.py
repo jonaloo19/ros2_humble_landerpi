@@ -8,7 +8,7 @@ from launch import LaunchDescription, LaunchService
 from launch.substitutions import LaunchConfiguration
 
 def launch_setup(context):
-    compiled = os.environ['need_compile']
+    # compiled = os.environ['need_compile']
     enable_save = LaunchConfiguration('enable_save', default='true').perform(context)
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     map_frame = LaunchConfiguration('map_frame', default='map')

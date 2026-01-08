@@ -2,6 +2,8 @@
 
 This repository assumes you first install Ubuntu 22.04 (Jammy), then use the provided scripts to install ROS2 Humble, Gazebo (Fortress), and the LanderPi model/examples. It ships a ready-to-use ROS2 Humble workspace covering the robot, navigation/SLAM stacks, arm control, and perception demos. The scripts install ROS2, dependencies, copy the workspace to `~/ros2_ws`, and build it.
 
+![LanderPi](media/Image0.jpg)
+
 ## Ubuntu GPU guides
 This section provides setup guides for Ubuntu 22.04 GPU configurations in dual-boot and WSL2 environments to ensure Gazebo and ROS2 run with hardware acceleration.
 
@@ -16,7 +18,7 @@ git clone https://github.com/jonaloo19/ros2_humble_landerpi.git
 cd ros2_humble_landerpi
 ```
 
-2) Install ROS 2 Humble (skips if already present):
+2) Install ROS2 Humble (skips if already present):
 ```bash
 chmod +x install_ros2_humble.sh
 ./install_ros2_humble.sh
@@ -123,7 +125,7 @@ Runs the color-based pick-and-place executor; rerun if the grasp fails.
 ros2 run landerpi_arm color_pick_executor --ros-args -p use_sim_time:=true -p cruise_joints:="[0.35,-0.42,-0.96,-1.57,-1.54]" -p skip_home:=false -p color_priority:="['GREEN','RED','BLUE','YELLOW']" -p z_min:=0.035 -p dz_grasp:=0.00 -p dx_grasp:=-0.02 -p dy_grasp:=-0.02
 ```
 
-![Picking a block](image1.png)
+![Picking a block](media/image1.png)
 
 
 # Frontier Exploration Application
@@ -132,8 +134,8 @@ Starts the frontier exploration node to autonomously explore the map. It will no
 ros2 run custom_explorer explorer
 ```
 
-![Navigating](image2.png)
-[Watch demo](video1.webm)
+![Navigating](media/image2.png)
+[Watch demo](media/video1.webm)
 
 # Kill ROS
 Stops existing ROS/Gazebo processes before relaunching to avoid conflicts.

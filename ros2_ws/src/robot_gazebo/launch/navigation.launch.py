@@ -19,7 +19,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction, SetEnvironmentVariable
 from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration, PythonExpression,PathJoinSubstitution
+from launch.substitutions import Command, LaunchConfiguration, PythonExpression,PathJoinSubstitution
 from launch_ros.actions import LoadComposableNodes
 from launch_ros.actions import Node
 from launch_ros.descriptions import ComposableNode, ParameterFile
@@ -74,6 +74,8 @@ def launch_setup(context):
 
     stdout_linebuf_envvar = SetEnvironmentVariable(
         'RCUTILS_LOGGING_BUFFERED_STREAM', '1')
+    machine_type_env = SetEnvironmentVariable(
+        'MACHINE_TYPE', LaunchConfiguration('machine_type'))
 
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace',
@@ -110,6 +112,15 @@ def launch_setup(context):
         'log_level', default_value='info',
         description='log level')
 
+    declare_machine_type_cmd = DeclareLaunchArgument(
+        'machine_type', default_value='LanderPi_Mecanum',
+        description='Robot base type (e.g., LanderPi_Mecanum)')
+
+    declare_publish_robot_description_cmd = DeclareLaunchArgument(
+        'publish_robot_description', default_value='true',
+        description='Publish robot_description for RViz')
+
+
     # 移除未使用的备用配置声明
     # declare_controller_server_params_file_cmd = DeclareLaunchArgument(
     #     'controller_server_file',
@@ -119,6 +130,22 @@ def launch_setup(context):
     map_arg = DeclareLaunchArgument(
         'map',
         default_value=PathJoinSubstitution([robot_gazebo_dir, 'maps', 'map_01.yaml']))
+
+    xacro_file = os.path.join(robot_gazebo_dir, 'urdf', 'robot.gazebo.xacro')
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='nav2_robot_state_publisher',
+        output='screen',
+        parameters=[{
+            'robot_description': Command([
+                'xacro ', xacro_file,
+                ' sim_ign:=true'
+            ]),
+            'use_sim_time': use_sim_time
+        }],
+        condition=IfCondition(LaunchConfiguration('publish_robot_description'))
+    )
 
     rclcpp_componentsr_node = Node(
         name='nav2_container',
@@ -316,9 +343,14 @@ def launch_setup(context):
         declare_container_name_cmd,
         declare_use_respawn_cmd,
         declare_log_level_cmd,
+        declare_machine_type_cmd,
+        declare_publish_robot_description_cmd,
         
-        localization_launch,
+        
+        # localization_launch,  # 探索模式：禁用AMCL，使用SLAM定位
         load_nodes,
+        machine_type_env,
+        robot_state_publisher_node,
         rviz2
     ]
 

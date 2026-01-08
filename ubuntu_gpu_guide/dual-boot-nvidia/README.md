@@ -27,7 +27,7 @@ Unlike WSL, Ubuntu in a dual-boot setup has **direct, native access to the NVIDI
 ## Table of Contents
 
 - [Step 1. Prepare Windows for Dual-Boot](#step-1-prepare-windows-for-dual-boot)
-- [Step 2 Install NVIDIA Driver on Ubuntu](#step-2-install-nvidia-driver-on-ubuntu)
+- [Step 2. Install NVIDIA Driver on Ubuntu](#step-2-install-nvidia-driver-on-ubuntu)
 - [Step 3 Verify Native GPU Acceleration](#step-3-verify-native-gpu-acceleration)
 - [Step 4 Hybrid Graphics & PRIME (Laptops)](#step-4-verify-hybrid-graphics--opengl-renderer)
 - [Step 5. Recommended Ubuntu Workflow](#step-5-launch-gazebo-with-nvidia-gpu)
@@ -59,7 +59,7 @@ lspci | grep -i nvidia
 ```bash
 sudo apt update
 sudo ubuntu-drivers devices
-sudo apt install autoinstall
+sudo ubuntu-drivers autoinstall
 sudo reboot
 ```
 
@@ -119,7 +119,7 @@ This confirms that the system is configured for on-demand GPU offloading, which 
 
 ---
 
-### 4.2 Verify Default OpenGL Renderer
+### 4.3 Verify Default OpenGL Renderer
 Run:
 ```bash
 glxinfo | grep -E "OpenGL vendor|OpenGL renderer|OpenGL version"
@@ -130,7 +130,7 @@ OpenGL vendor string: Intel
 OpenGL renderer string: Mesa Intel(R) UHD ...
 ```
 ---
-### 4.3 Verify NVIDIA GPU Offloading
+### 4.4 Verify NVIDIA GPU Offloading
 ```bash
 prime-run glxinfo | grep -E "OpenGL vendor|OpenGL renderer|OpenGL version"
 ```
@@ -144,12 +144,19 @@ This confirms that NVIDIA PRIME offloading is working correctly, and that applic
 
 ---
 
+## Step 5. Launch Gazebo with NVIDIA GPU
 
-## Step 5. Launch Gazebo with Nvidia GPU
-
-### 5.1 Single app use `prime-run` for Nvidia GPU offloading, Desktop GPU still on Intel 
+### 5.1 For a single app, use `prime-run` for NVIDIA GPU offloading; desktop GPU stays on Intel
+Run:
 ```bash
 prime-run ros2 launch robot_gazebo worlds.launch.py world_name:=maze_world nav:=false
+```
+For persistent NVIDIA GPU offloading, add the environment parameters below to `.bashrc`:
+
+```bash
+export __NV_PRIME_RENDER_OFFLOAD=1
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export __VK_LAYER_NV_optimus=NVIDIA_only
 ```
 ---
 
@@ -166,6 +173,9 @@ Expected output:
 ```text
 nvidia
 ```
+
+
+Note: On some laptops (including mine), the above environment variables are still required for `watch nvidia-smi` to show activity even when PRIME is set to `nvidia`.
 
 ---
 

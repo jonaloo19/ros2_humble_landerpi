@@ -2,7 +2,7 @@
 set -e
 
 echo "============================================================"
-echo "  ROS 2 Humble + Gazebo Fortress + LanderPi Install Script"
+echo "  ROS2 Humble + Gazebo Fortress + LanderPi Install Script"
 echo "============================================================"
 
 # Paths
@@ -41,9 +41,11 @@ sudo apt install -y tmux
 sudo apt install -y rsync lsb-release
 
 # ROS–Gazebo bridge (ros_gz / ros_ign)
-sudo apt install -y ros-humble-ros-gz
 sudo apt install -y ros-humble-ros-ign-gazebo
 sudo apt install -y ros-humble-ros-ign-bridge
+sudo apt install -y ros-humble-ign-ros2-control
+sudo apt install -y ros-humble-ros-gz
+sudo apt install -y ros-humble-ros-gz-bridge
 sudo apt install -y ros-humble-gz-ros2-control
 
 # Controllers & nav stack components
@@ -51,18 +53,19 @@ sudo apt install -y ros-humble-controller-manager \
                     ros-humble-ros2-control \
                     ros-humble-ros2-controllers
 
-sudo apt install -y ros-humble-nav2-costmap-2d
-
-sudo apt install -y ros-humble-dwb-critics \
-                    ros-humble-dwb-core \
-                    ros-humble-dwb-plugins
+sudo apt install -y ros-humble-slam-toolbox
 
 sudo apt install -y ros-humble-navigation2 \
                     ros-humble-nav2-bringup \
                     ros-humble-cartographer \
                     ros-humble-cartographer-ros
 
-sudo apt install -y ros-humble-slam-toolbox
+sudo apt install -y ros-humble-nav2-costmap-2d
+
+sudo apt install -y ros-humble-dwb-critics \
+                    ros-humble-dwb-core \
+                    ros-humble-dwb-plugins
+
 sudo apt install -y ros-humble-libg2o
 
 # Math libs
@@ -110,7 +113,7 @@ fi
 # 4. Build workspace
 # ----------------------------------------------------------------------
 echo "[4/6] Building workspace with colcon..."
-echo "[4/6] Sourcing ROS 2 Humble..."
+echo "[4/6] Sourcing ROS2 Humble..."
 source /opt/ros/humble/setup.bash
 cd "$DEST_WS"
 
